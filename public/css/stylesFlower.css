@@ -41,6 +41,10 @@
   margin-left: 23%;
 }
 
+.hide {
+  visibility: hidden;
+}
+
 .guest {
   margin-left: 2px;
 }
