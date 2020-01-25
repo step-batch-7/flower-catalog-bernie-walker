@@ -1,0 +1,46 @@
+.top-div {
+  width: 80%;
+  margin: 2px auto;
+  padding: 3px;
+}
+
+.page-heading {
+  border-bottom: 1px solid black;
+  padding: 3px 3px 10px 3px;
+  text-align: center;
+  font-size: 2.6vw;
+  color: hsla(40 90% 50%);
+  letter-spacing: 1px;
+  font-family: sans-serif;
+}
+
+.content {
+  padding: 3px;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.origin-image {
+  border: 1px solid black;
+  width: 80%;
+  height: auto;
+}
+
+.sidebar {
+  padding: 1px;
+  width: 19%;
+}
+
+.option-list {
+  margin-top: 90%;
+}
+
+.jug {
+  margin-left: 23%;
+}
+
+.guest {
+  margin-left: 2px;
+}
