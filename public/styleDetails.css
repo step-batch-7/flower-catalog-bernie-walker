@@ -1,0 +1,39 @@
+.top-div {
+  border: 1px solid;
+  width: 80%;
+  margin: 2px auto;
+  padding: 3px;
+}
+
+.page-heading {
+  border: 1px solid black;
+  padding: 3px 3px 10px 3px;
+  text-align: center;
+  font-size: 2.6vw;
+  color: hsla(40 90% 50%);
+  letter-spacing: 1px;
+  font-family: sans-serif;
+}
+
+.content {
+  border: 1px solid;
+  padding: 6px;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.content-image {
+  border: 1px solid;
+  width: 40%;
+  height: auto;
+}
+
+.content-details {
+  border: 1px solid;
+  margin-top: 20%;
+  padding: 3px;
+  width: 58%;
+  height: auto;
+}
