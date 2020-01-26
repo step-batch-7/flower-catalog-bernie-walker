@@ -12,6 +12,10 @@ const handleRequest = function(socket) {
 
     socket.write(message);
   });
+
+  socket.on('close', () => {
+    console.log(`socket ${socket.remoteAddress} closed`);
+  });
 };
 
 const main = function() {
