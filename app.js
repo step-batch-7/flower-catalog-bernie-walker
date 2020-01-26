@@ -2,10 +2,14 @@ const { readFileSync, statSync } = require('fs');
 const { Response } = require('./lib/response');
 const CONTENT_TYPES = require('./lib/mimeTypes');
 
+const getLastModified = filePath => {
+  const date = statSync(filePath).mtime;
+  return new Date(date).toUTCString();
+};
+
 const getResource = function(request, response) {
   let { fileName, extension } = request.getResourceDetails();
   const nonTextExt = ['pdf', 'gif', 'jpg'];
-  const pubPath = './public';
   let encoding = 'utf8';
 
   if (fileName === '/') {
@@ -17,12 +21,21 @@ const getResource = function(request, response) {
     encoding = '';
   }
 
+  const filePath = `./public/${fileName}`;
   try {
-    const content = readFileSync(`${pubPath}${fileName}`, encoding);
+    const lastModified = getLastModified(filePath);
+
+    if (request.isFileModified(lastModified)) {
+      response.updateResponse(304);
+      return;
+    }
+
+    const content = readFileSync(filePath, encoding);
     response.updateResponse(200);
     response.addBody(content);
     response.updateHeader('Content-Length', content.length + 1);
     response.updateHeader('Content-type', CONTENT_TYPES[extension]);
+    response.updateHeader('Last-Modified', lastModified);
   } catch (error) {
     response.updateResponse(404);
   }
