@@ -26,23 +26,20 @@ const getResource = function(request, response) {
   } catch (error) {
     response.updateResponse(404);
   }
-
-  return response.getMessage();
 };
 
-const getResponse = function(request) {
+const generateResponse = function(request, socket) {
   const fileHandlerLookup = { GET: getResource };
   const response = new Response(new Date().toUTCString());
   const fileHandler = fileHandlerLookup[request.command];
 
   response.updateResponse(402);
-  let message = response.getMessage();
 
   if (fileHandler) {
-    message = fileHandler(request, response);
+    fileHandler(request, response);
   }
 
-  return message;
+  response.writeTo(socket);
 };
 
-module.exports = { getResponse };
+module.exports = { generateResponse };
