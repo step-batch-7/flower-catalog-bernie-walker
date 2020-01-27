@@ -15,7 +15,8 @@
         <h2>Leave a Comment</h2>
         <form action="recordComment" method="POST">
           <p>
-            Name: <input type="text" name="username" required /> <br />
+            Name: <input type="text" name="username" required />
+            <br />
 
             Comment:
             <textarea name="commentText" cols="45" rows="5"></textarea> <br />
@@ -26,7 +27,15 @@
       </div>
 
       <div class="display-section">
-        __comment-section__
+        <table id="comments">
+          <tr>
+            <th class="date">Date</th>
+            <th class="time">Time</th>
+            <th class="name">Name</th>
+            <th class="comment">Comment</th>
+          </tr>
+          __comment-section__
+        </table>
       </div>
     </div>
   </body>

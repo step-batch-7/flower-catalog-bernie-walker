@@ -6,14 +6,18 @@ const read = function() {
   const data = readData();
 
   if (data.length === 0) {
-    return 'no comments to display';
+    return 'NO COMMENTS TO SHOW';
   }
 
   const commentString = data
-    .map(
-      entry =>
-        `<p class="comment-line">${entry.date} <span id="name">${entry.name}</span> <span id="comment">${entry.comment}</span></p>`
-    )
+    .map(entry => {
+      return `<tr>
+      <td class="date">${entry.date}</td>
+      <td class="time">${entry.time}</td>
+      <td class="name">${entry.name}</td>
+      <td class="comment">${entry.comment}</td>
+      </tr>`;
+    })
     .join('\n');
 
   return commentString;
@@ -21,12 +25,13 @@ const read = function() {
 
 const writeEntry = function(entry) {
   const data = readData();
-  const date = new Date().toUTCString();
+  const date = new Date().toUTCString().match(/(.*)\ \d{2}\:/)[1];
+  const time = new Date().toLocaleTimeString();
   const [name, comment] = entry
     .split('&')
-    .map(field => field.split('=')[1].replace(/\+/g, ' '));
+    .map(field => decodeURIComponent(field.split('=')[1].replace(/\+/g, ' ')));
 
-  data.unshift({ date, name, comment });
+  data.unshift({ date, time, name, comment });
 
   writeFileSync('./comments.json', JSON.stringify(data, null, 2), 'utf8');
 };
