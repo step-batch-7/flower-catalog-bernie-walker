@@ -1,1 +1,12 @@
-[{ "date": "12-12-12", "name": "bernie", "comments": "noComment" }]
+[
+  {
+    "date": "Mon, 27 Jan 2020 09:50:31 GMT",
+    "name": "bernie walker",
+    "comment": "this is the real deal"
+  },
+  {
+    "date": "Mon, 27 Jan 2020 09:49:19 GMT",
+    "name": "bernie walker",
+    "comment": "this is the real deal"
+  }
+]

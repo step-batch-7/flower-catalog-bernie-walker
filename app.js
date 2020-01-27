@@ -18,6 +18,11 @@ const loadGuestBook = function(response) {
   response.updateHeader('Content-type', CONTENT_TYPES['html']);
 };
 
+const postDetails = function(request, response) {
+  accessComments.writeEntry(request.body);
+  loadGuestBook(response);
+};
+
 const getLastModified = filePath => {
   const date = statSync(filePath).mtime;
   return new Date(date).toUTCString();
@@ -59,7 +64,7 @@ const getResource = function(request, response) {
 };
 
 const generateResponse = function(request, socket) {
-  const fileHandlerLookup = { GET: getResource };
+  const fileHandlerLookup = { GET: getResource, POST: postDetails };
   const response = new Response(new Date().toUTCString());
   const fileHandler = fileHandlerLookup[request.command];
 
