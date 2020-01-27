@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./css/styleGuestBook.css" />
+    <script src="./js/comments.js"></script>
+    <script src="./js/displayComments.js"></script>
+    <title>Flower Catalogue Guest Book</title>
+  </head>
+  <body>
+    <div class="top-div">
+      <div class="page-heading">
+        <a href="./index.html">&lt;&lt;</a>Guest Book
+      </div>
+
+      <div class="comment-section">
+        <h2>Leave a Comment</h2>
+        <form action="recordComment" method="POST">
+          <p>
+            Name: <input type="text" name="username" /> <br />
+
+            Comment:
+            <textarea name="commentText" cols="45" rows="5"></textarea> <br />
+
+            <input type="submit" id="submit-button" />
+          </p>
+        </form>
+      </div>
+
+      <div class="display-section"></div>
+    </div>
+  </body>
+</html>

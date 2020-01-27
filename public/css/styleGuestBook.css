@@ -1,0 +1,46 @@
+.top-div {
+  border: 1px solid;
+  width: 85%;
+  margin: 2px auto;
+  padding: 3px;
+}
+
+.page-heading {
+  border: 1px solid;
+  padding: 3px 3px 10px 3px;
+  text-align: center;
+  font-size: 2.6vw;
+  color: hsla(40, 90%, 50%);
+  letter-spacing: 1px;
+  font-family: sans-serif;
+}
+
+.comment-section {
+  border: 1px solid;
+  padding: 3px;
+  margin: 2px auto;
+}
+
+.comment-section > h2 {
+  margin-top: 1px;
+  letter-spacing: 0.3px;
+}
+
+#submit-button {
+  width: 6%;
+  border: 1px solid rgba(100, 100, 100, 0.8);
+  border-radius: 5%;
+  text-align: center;
+  font-size: 1.1vw;
+  font-weight: 500;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(240, 240, 240, 0.8),
+    rgba(190, 190, 190, 0.8)
+  );
+}
+
+.display-section {
+  border: 1px solid;
+  padding: 3px;
+}
