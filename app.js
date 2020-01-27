@@ -1,6 +1,22 @@
 const { readFileSync, statSync } = require('fs');
 const { Response } = require('./lib/response');
+const accessComments = require('./commentAccess');
 const CONTENT_TYPES = require('./lib/mimeTypes');
+
+const loadGuestBook = function(response) {
+  const pageTemplate = readFileSync('./templates/guestBook.html', 'utf8').split(
+    '__comment-section__'
+  );
+  const comments = accessComments.read();
+  const content = pageTemplate
+    .concat(pageTemplate.splice(1, 1, comments))
+    .join('\n');
+
+  response.updateResponse(200);
+  response.addBody(content);
+  response.updateHeader('Content-Length', content.length + 1);
+  response.updateHeader('Content-type', CONTENT_TYPES['html']);
+};
 
 const getLastModified = filePath => {
   const date = statSync(filePath).mtime;
@@ -10,27 +26,28 @@ const getLastModified = filePath => {
 const getResource = function(request, response) {
   let { fileName, extension } = request.getResourceDetails();
   const nonTextExt = ['pdf', 'gif', 'jpg'];
-  let encoding = 'utf8';
+  const filePath = `./public${fileName}`;
 
-  if (fileName === '/') {
-    fileName = '/index.html';
-    extension = 'html';
+  if (fileName === '/guest-book') {
+    loadGuestBook(response);
+    return;
   }
 
-  if (nonTextExt.includes(extension)) {
-    encoding = '';
-  }
-
-  const filePath = `./public/${fileName}`;
   try {
     const lastModified = getLastModified(filePath);
+    let content;
 
     if (request.isFileModified(lastModified)) {
       response.updateResponse(304);
       return;
     }
 
-    const content = readFileSync(filePath, encoding);
+    if (nonTextExt.includes(extension)) {
+      content = readFileSync(filePath);
+    } else {
+      content = readFileSync(filePath, 'utf8');
+    }
+
     response.updateResponse(200);
     response.addBody(content);
     response.updateHeader('Content-Length', content.length + 1);

@@ -1,12 +1,10 @@
 .top-div {
-  border: 1px solid;
   width: 85%;
   margin: 2px auto;
   padding: 3px;
 }
 
 .page-heading {
-  border: 1px solid;
   padding: 3px 3px 10px 3px;
   text-align: center;
   font-size: 2.6vw;
@@ -16,7 +14,6 @@
 }
 
 .comment-section {
-  border: 1px solid;
   padding: 3px;
   margin: 2px auto;
 }
