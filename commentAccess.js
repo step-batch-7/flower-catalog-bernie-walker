@@ -1,6 +1,6 @@
 const { readFileSync, writeFileSync } = require('fs');
 
-const readData = () => JSON.parse(readFileSync('./lib/comments.json', 'utf8'));
+const readData = () => JSON.parse(readFileSync('./comments.json', 'utf8'));
 
 const read = function() {
   const data = readData();
@@ -10,7 +10,10 @@ const read = function() {
   }
 
   const commentString = data
-    .map(entry => `<p>${entry.date} ${entry.name} ${entry.comment}</p>`)
+    .map(
+      entry =>
+        `<p class="comment-line">${entry.date} <span id="name">${entry.name}</span> <span id="comment">${entry.comment}</span></p>`
+    )
     .join('\n');
 
   return commentString;
@@ -25,7 +28,7 @@ const writeEntry = function(entry) {
 
   data.unshift({ date, name, comment });
 
-  writeFileSync('./lib/comments.json', JSON.stringify(data, null, 2), 'utf8');
+  writeFileSync('./comments.json', JSON.stringify(data, null, 2), 'utf8');
 };
 
 module.exports = { read, writeEntry };
