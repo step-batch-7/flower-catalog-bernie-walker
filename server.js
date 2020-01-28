@@ -11,6 +11,10 @@ const handleRequest = function(socket) {
     generateResponse(Request.from(req), socket);
   });
 
+  socket.on('error', error => {
+    console.log('CONNECTION WAS RESET');
+  });
+
   socket.on('close', () => {
     console.log(`socket ${socket.remoteAddress} closed`);
   });
