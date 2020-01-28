@@ -1,31 +1,18 @@
-const { Server } = require('net');
-const { Request } = require('./lib/request');
-const { generateResponse } = require('./app');
-
-const handleRequest = function(socket) {
-  console.log(`connected to ${socket.remoteAddress} at ${socket.remotePort}`);
-
-  socket.setEncoding('utf8');
-
-  socket.on('data', req => {
-    generateResponse(Request.from(req), socket);
-  });
-
-  socket.on('error', error => {
-    console.log('CONNECTION WAS RESET');
-  });
-
-  socket.on('close', () => {
-    console.log(`socket ${socket.remoteAddress} closed`);
-  });
-};
+const { Server } = require('http');
+const { generateResponse } = require('./lib/app');
 
 const main = function() {
-  const server = new Server();
+  const server = new Server((request, response) => {
+    const { socket } = request;
+    console.log(`connected to ${socket.remoteAddress} at ${socket.remotePort}`);
 
-  server.on('connection', handleRequest);
+    request.on('close', () => {
+      console.log('REQUEST ENDED');
+    });
+    generateResponse(request, response);
+  });
 
-  server.listen(9999, () => {
+  server.listen(3000, () => {
     console.log('Server started at', server.address());
   });
 };
