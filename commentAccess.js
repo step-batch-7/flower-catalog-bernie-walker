@@ -11,11 +11,15 @@ const read = function() {
 
   const commentString = data
     .map(entry => {
+      const comment = entry.comment
+        .replace(/ /g, '&nbsp;')
+        .replace(/\r\n/g, '<br>');
+
       return `<tr>
       <td class="date">${entry.date}</td>
       <td class="time">${entry.time}</td>
       <td class="name">${entry.name}</td>
-      <td class="comment">${entry.comment}</td>
+      <td class="comment">${comment}</td>
       </tr>`;
     })
     .join('\n');
@@ -24,6 +28,7 @@ const read = function() {
 };
 
 const writeEntry = function(entry) {
+  console.log(entry);
   const data = readData();
   const date = new Date().toUTCString().match(/(.*)\ \d{2}\:/)[1];
   const time = new Date().toLocaleTimeString();
