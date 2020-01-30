@@ -1,5 +1,5 @@
 const { Server } = require('http');
-const { generateResponse } = require('./lib/app');
+const { generateResponse } = require('./lib/handlers.js');
 
 const main = function() {
   const server = new Server((request, response) => {
