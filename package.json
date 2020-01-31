@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nyc mocha",
     "start": "node server.js"
   },
   "repository": {
@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/step-batch-7/flower-catalog-bernie-walker#readme",
   "devDependencies": {
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0",
     "supertest": "^4.0.2"
   }
 }
