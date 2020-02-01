@@ -44,6 +44,23 @@ describe('GET /guest-book', function() {
       });
   });
 
+  it('should respond with the guest book when data base is empty', function(done) {
+    fakeReader.returns('');
+    request(generateResponse)
+      .get('/guest-book.html')
+      .expect(200)
+      .expect('Content-Type', 'text/html')
+      .expect('Content-Length', '1101')
+      .expect(/Guest Book/)
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          return;
+        }
+        done();
+      });
+  });
+
   it('should respond with the guest book with comments', function(done) {
     fakeReader.returns(`[
       {
@@ -185,7 +202,7 @@ describe('handleWhenNoResponse', function() {
 
   it('should respond with file not found when resource us directory', function(done) {
     request(generateResponse)
-      .get('/lib')
+      .get('/../lib')
       .expect(404)
       .expect('404 Not found')
       .end((err, res) => {
